@@ -1,0 +1,13 @@
+.idea
+__pycache__
+virtual
+test
+**/.pytest_cache
+.coverage
+htmlcov
+junit
+.scannerwork
+coverage.xml
+python_function/function/profiler_test.py
+sonar-project.properties
+.vscode
