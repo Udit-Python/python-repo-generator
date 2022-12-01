@@ -6,6 +6,7 @@ from create_requirements import create_requirements_file
 from create_shell_files import create_shell_files, create_deployment_shell_script
 from create_template_yaml import create_template_yaml
 from create_param_json import create_param_json
+from create_lambda_files import create_lambda_and_lambda_test
 
 
 def print_hi(name):
@@ -26,6 +27,7 @@ def print_hi(name):
     create_deployment_shell_script(repo_name)
     create_template_yaml(repo_name)
     create_param_json(repo_name)
+    create_lambda_and_lambda_test(repo_name)
 
 
 if __name__ == '__main__':
