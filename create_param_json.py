@@ -15,7 +15,15 @@ def create_param_json(path):
         'sg': "SecurityGroupId={}",
         'subnets': "VpcSubnetIds={}",
         'component': 'ComponentName={}',
-        'layer': 'LayerName={}'
+        'layer': 'LayerName={}',
+        'kibana_role': 'KibanaRole={}',
+        'email_topic': 'TeamEmailTopic={}',
+        'metric_name': "CustomMetricName{}",
+        'metric_name_space': 'CustomMetricNamespace={}',
+        'service_now_arn': 'ServiceNowTopicArn={}',
+        'service_now_high_arn': 'ServiceNowTopicArnHigh={}',
+        'ci_name': 'CIName={}'
+
     }
 
     for env in environments:
@@ -26,7 +34,6 @@ def create_param_json(path):
         component, layer_name = '', ''
 
         if consent and consent == 'Y':
-
             fn_name = input("Enter Function Name [XXX-XXX-env] :: ")
             fn_role = input("Enter Function Role full ARN :: ")
             security_grps = input("Enter Security Group ID ::[sg-XXX]:: ")
