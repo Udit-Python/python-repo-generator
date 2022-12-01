@@ -25,8 +25,8 @@ def print_hi(name):
     create_requirements_file(repo_name)
     create_shell_files(repo_name)
     create_deployment_shell_script(repo_name)
-    create_template_yaml(repo_name)
-    create_param_json(repo_name)
+    kibana_created, alarms_created = create_template_yaml(repo_name)
+    create_param_json(repo_name, kibana_created, alarms_created)
     create_lambda_and_lambda_test(repo_name)
 
 

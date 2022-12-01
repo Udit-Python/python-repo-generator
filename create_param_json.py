@@ -3,7 +3,7 @@ import json
 import time
 
 
-def create_param_json(path):
+def create_param_json(path, kibana_created, alarms_created):
     print("Creating Parameter Json Files ....")
     environments = ['devl', 'qual', 'cert', 'prod']
     time.sleep(1)
@@ -15,31 +15,39 @@ def create_param_json(path):
         'sg': "SecurityGroupId={}",
         'subnets': "VpcSubnetIds={}",
         'component': 'ComponentName={}',
-        'layer': 'LayerName={}',
-        'kibana_role': 'KibanaRole={}',
+        'layer': 'LayerName={}'
+    }
+
+    alarm_skeleton = {
         'email_topic': 'TeamEmailTopic={}',
-        'metric_name': "CustomMetricName{}",
+        'metric_name': "CustomMetricName={}",
         'metric_name_space': 'CustomMetricNamespace={}',
         'service_now_arn': 'ServiceNowTopicArn={}',
         'service_now_high_arn': 'ServiceNowTopicArnHigh={}',
         'ci_name': 'CIName={}'
-
     }
+
+    if kibana_created and kibana_created == 'Y':
+        parameter_skeletons = parameter_skeletons | {'kibana_role': 'KibanaRole={}'}
+
+    if alarms_created and alarms_created == 'Y':
+        parameter_skeletons = parameter_skeletons | alarm_skeleton
+
+    print("Enter Common configuration.....")
+    fn_name = input("Enter Function Name [XXX-XXX-env] :: ")
+    component = input("Enter Component Tag :: ")
+    layer_name = fn_name + '-lib'
 
     for env in environments:
         parameter_skeleton = copy.deepcopy(parameter_skeletons)
         consent = input(f"Do you want to enter {env} env parameters ? (Y/N)")
-        fn_name, security_grps = '', ''
+        security_grps = ''
         fn_role, subnets = '', ''
-        component, layer_name = '', ''
 
         if consent and consent == 'Y':
-            fn_name = input("Enter Function Name [XXX-XXX-env] :: ")
             fn_role = input("Enter Function Role full ARN :: ")
             security_grps = input("Enter Security Group ID ::[sg-XXX]:: ")
             subnets = input("Enter Subnets [Comma separated] :: ")
-            component = input("Enter Component Tag :: ")
-            layer_name = fn_name + '-lib'
 
         parameter_skeleton['fn_name'] = parameter_skeleton['fn_name'].format(fn_name + "-" + env)
         parameter_skeleton['fn_role'] = parameter_skeleton['fn_role'].format(fn_role)
@@ -55,3 +63,6 @@ def create_param_json(path):
                 aws_json_format.append(parameter_skeleton[key])
 
             env_file.write(json.dumps(aws_json_format))
+
+
+create_param_json("./test", 'Y', 'Y')
