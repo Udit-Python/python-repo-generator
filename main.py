@@ -7,6 +7,7 @@ from create_shell_files import create_shell_files, create_deployment_shell_scrip
 from create_template_yaml import create_template_yaml
 from create_param_json import create_param_json
 from create_lambda_files import create_lambda_and_lambda_test
+from create_sonar_file import create_sonar_file
 
 
 def print_hi(name):
@@ -28,6 +29,7 @@ def print_hi(name):
     kibana_created, alarms_created = create_template_yaml(repo_name)
     create_param_json(repo_name, kibana_created, alarms_created)
     create_lambda_and_lambda_test(repo_name)
+    create_sonar_file(repo_name)
 
 
 if __name__ == '__main__':

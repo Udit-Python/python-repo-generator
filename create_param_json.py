@@ -63,6 +63,3 @@ def create_param_json(path, kibana_created, alarms_created):
                 aws_json_format.append(parameter_skeleton[key])
 
             env_file.write(json.dumps(aws_json_format))
-
-
-create_param_json("./test", 'Y', 'Y')
