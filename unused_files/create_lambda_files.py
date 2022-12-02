@@ -1,4 +1,4 @@
-from sample_values import get_lambda_sample_code, get_lambda_test_sample_code
+from sample_lambda_code import get_lambda_sample_code, get_lambda_test_sample_code
 
 
 def create_lambda_and_lambda_test(path):

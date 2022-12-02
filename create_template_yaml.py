@@ -37,5 +37,4 @@ def create_template_yaml(path):
     with open(f"{path}/template.yml", 'w') as template_file:
         yaml.dump(final_template, template_file)
 
-
     return kibana_, alarm

@@ -24,7 +24,7 @@ def lambda_handler(event, context):
     return lambda_code
 
 
-def get_lambda_test_sample_code():
+def get_lambda_test_sample_code(**kwargs):
     lambda_test_code = f"""
 import os
 import pytest
